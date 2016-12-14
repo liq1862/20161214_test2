@@ -1,5 +1,7 @@
 package com.example.user.a20161214_test2;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +20,10 @@ import com.google.android.gms.location.LocationServices;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
@@ -60,6 +66,16 @@ public class MainActivity extends AppCompatActivity
 
         Float distance = mLastLocation.distanceTo(trainStation);
         Log.d("LOC", "中壢火車站距離:" + distance);
+
+
+        Geocoder gc = new Geocoder(this, Locale.TRADITIONAL_CHINESE);
+        try {
+            List<Address> lstAddress = gc.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
+            String returnAddress=lstAddress.get(0).getAddressLine(0);
+            Log.d("LOC", returnAddress);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
