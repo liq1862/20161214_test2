@@ -44,6 +44,12 @@ public class MainActivity extends AppCompatActivity
         {
             Log.d("LOC", "" + mLastLocation.getLatitude() + "," + mLastLocation.getLongitude());
         }
+        Location trainStation = new Location("MY");
+        trainStation.setLatitude(24.953);
+        trainStation.setLongitude(121.225);
+
+        Float distance = mLastLocation.distanceTo(trainStation);
+        Log.d("LOC", "中壢火車站距離:" + distance);
 
     }
 
